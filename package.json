@@ -1,0 +1,24 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "3.5.1",
+    "commander": "2.15.1",
+    "hapi": "15.2.0",
+    "hapi-auth-jwt2": "7.1.0",
+    "hapi-swagger": "7.10.0",
+    "inert": "4.2.1",
+    "joi": "13.1.2",
+    "jsonwebtoken": "8.2.1",
+    "mongoose": "5.0.14",
+    "vision": "4.1.1"
+  }
+}
