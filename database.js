@@ -6,7 +6,7 @@ const bluebird = require('bluebird')
 const { readFile, writeFile, existsSync } = require('fs')
 
 
-// passamos a quantidade de argumentos de itens que queremos extrair
+
 
 
 const [writeFileAsync, readFileAsync] = [
@@ -14,8 +14,7 @@ const [writeFileAsync, readFileAsync] = [
     bluebird.promisify(readFile)
 ]
 
-// para alterar todas as funções em tempo de execução
-// bluebird.promisifyAll(fs)
+
 
 class Database {
     constructor() {
