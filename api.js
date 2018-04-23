@@ -1,90 +1,30 @@
-// npm i --save inert@4 vision@4  hapi-swagger@7
+12
 
-// Para ao salvar nosso arquivo e reiniciar
-// o servidor autoMAGICAMENTE
-// npm i -g nodemon
-// nodemon api.js
 
-// Arquiteturas Rest, não guardam estado
-// -> Não saber o que acontece quando uma requisão sai
-// -> ou quem veio antes dessa requisição
-
-// Métodos e padrões HTTP para manipular
-// os REsultados e Chamadas
-
-// -> Listar Pessoas
-// -> GET -> Obter dados usamos o GET
-// -> /pessoas -> sempre no plural
-// -> para filtro, usamos queryStrings
-// -> /pessoas?nome=Test&idade=12
-
-// -> Cadastrar Pessoas
-// -> POST -> Inserir novas informações
-// -> /pessoas -> parametros no BODY da requisição
-
-// -> Remover Pessoa
-// -> DELETE -> Remover um recurso
-// -> /pessoas/id -> sempre o id da pessoa na URL
-
-// -> Atualizar Pessoa
-// -> PATCH -> Atualizar um recurso parcialmente
-// Atualizar somente o nome da pessoa
-// -> PUT -> Atualizar o recurso completo
-// Atualizar todos os dados daquele objeto especifico
-// -> /pessoas/id -> propriedades no BODY
-
-// -> Pesquisa de pessoas > fazem parte de uma categoria
-
-// Obter o detalhe da categoria de uma pessoa
-// Pessoa tem varias categorias
-// GET
-// -> /pessoas/id/categorias/id
-
-// para manipular rotas, usamos o Hapi.js@15
-// npm i --save hapi@15
-
-// para trabalhar com autenticação com JSON Web Token
-// instalamos dois módulos
-// jsonwebtoken -> para gerar e validar os tokens
-// hapi-auth-jwt2 -> plugin (MIDDLEWARE) para o interceptador
-// que vai validar o token do cliente antes de devolver a resposta
-// todo cliente que acessar sua API obrigatoriamente
-// tem que passar um header com um token valido
-// npm i --save jsonwebtoken hapi-auth-jwt2
 
 const HapiJwt = require("hapi-auth-jwt2");
 const Jwt = require("jsonwebtoken");
-// para trabalhar com JWT temos alguns steps
-// -> registrar o plugin
-// -> criamos um provider de autenticação
-// -> adicionar às configs da aplicação
 
-// criamos uma chave SEGURA
+
+
 const JWT_KEY = "MINHA_CHAVE_SEGURA";
 
 const USUARIO_VALIDO = {
     email: "XuxadaSilva@gmail.com",
     senha: "123",
 };
-// para validar os requests
-// sem usar IF, sem manipular em nossas controllers
-// validar quantidade, conteudo, existencia
-// usamos o Joi
-// npm i --save joi
+
 const joi = require("joi");
 
 const Hapi = require("hapi");
 
-// instalamos o inert para servir arquivos estáticos
+
 const Inert = require("inert");
 
 const Vision = require("vision");
-// o swagger é responsável por documentar nossa API
-// em tempo de execução
+
 const HapiSwagger = require("hapi-swagger");
-// para usar o swagger, precisamos de alguns steps
-// -> registrar o plugin
-// -> adicionar às rotas, anotações do serviço
+
 
 const app = new Hapi.Server();
 app.connection({ port: 3000 });
@@ -92,9 +32,7 @@ const Database = require("./databaseMongo");
 const Heroi = require("./heroi");
 
 (async () => {
-    // registramos os plugins
-    // await app.register();
-    // criamos o provider
+    
     await app.register(HapiJwt);
     await app.register([
         Vision,
@@ -108,10 +46,7 @@ const Heroi = require("./heroi");
     app.auth.strategy("jwt", "jwt", {
         key: JWT_KEY,
         validateFunc: (tokenDescriptogrado, request, callback) => {
-            // aqui validamos a nossa chave
-
-            // para invalidar nossa chave, é só passar o false como
-            // segundo parametro do callback
+            
 
             return callback(null, true);
         },
@@ -137,7 +72,7 @@ const Heroi = require("./heroi");
                 return reply({ token });
             },
             config: {
-                // para desabilitar a autenticação
+               
                 auth: false,
                 tags: ["api"],
                 description: "Login de usuario",
@@ -172,20 +107,12 @@ const Heroi = require("./heroi");
                 }
             },
             config: {
-                // para o swagger ficar visível, é necessaria
-                // a propriedade TAGS
+                
                 tags: ["api"],
                 description: "Listar Herois",
                 notes: "Deve listar herois e filtrar por nome",
                 validate: {
-                    // para validar as queryStrings
-                    //   query
-                    // para validar corpo da requisicao
-                    // payload
-                    // para validar argumentos (que vem na URL)
-                    // params
-                    // para validar headers
-                    // headers
+                    
                     query: {
                         nome: joi.string().max(100),
                     },
