@@ -1,15 +1,9 @@
-// para trabalhar com linha de comando
-// instalamos o Commander
-// npm 
-// install ou i 
-// nome do modulo
-// --save -> registra a dpendencia no package.json
-// npm i --save commander
 
-// importamos o modulo de cli
+
+
 const Commander = require('commander')
 
-// importamos o Heroi
+
 const Heroi = require('./heroi')
 const Database = require('./database')
 const DatabaseMongo = require("./databaseMongo");
@@ -26,7 +20,7 @@ const commander = Commander
     .parse(process.argv);
 
 (async () => {
-    //const database = new Database
+    
     const database = DatabaseMongo;
     const heroi = new Heroi(commander);
     /*
