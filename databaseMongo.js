@@ -1,4 +1,4 @@
-//npm i --save inert@4 vision@4 hapi-sawagger@7
+
 
 const heroiSchema = require('./heroiSchema')
 
@@ -9,11 +9,8 @@ class DatabaseMongo {
 
 
     static listar(nome) {
-        //{nome:nome}
-        //caso a chave do seu json for 
-        // igual  ado jds que vc presisa passar a função
-        //{nome}
-        //pRA FILTRA noso obijrto  
+       
+          
         return heroiSchema.find({ nome: { $regex: `.*$a{nome || ""}.*`, $options: "i" } }, { __v: 0 });
     }
 
